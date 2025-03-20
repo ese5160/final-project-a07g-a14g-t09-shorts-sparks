@@ -12,7 +12,7 @@
 
 Note All HRS and SRS are currently just from a00g, no updates made
 
-test branch
+test a main addition
 
 ### Hardware Requirements Specification (HRS)
 
