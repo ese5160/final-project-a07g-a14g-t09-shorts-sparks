@@ -10,7 +10,17 @@
 
 ## 1 Software Architecture
 
+### Overall Project Updates / Differences from A00G proposal
+
+| Original | Current |
+| -------- | ------- |
+| Foam cyllinders 3d model prototypes |  Copper clad FR4 for milling PCB prototypes |
+| r(z), y, theta (cyllinder) cnc | x, y, z cnc |
+| Battery backup power in wall power outage case | Approved removal of battery as PCB milling times are faster so it is less expected and a less significant issue to lose power in the middle of a job |
+| Other updates? | .. |
+
 Note All HRS and SRS are currently just from a00g, no updates made
+- Plan: have the entierly updated HRS SRS for new system first, then below have three addtiional categories for unchanged, modified, and new HRS/SRS respectively
 
 ### Hardware Requirements Specification (HRS)
 
@@ -148,4 +158,4 @@ Submit a link to a video of this functionality in your README.md
 
 ## 7 Using Percepio
 
-Submit a screenshot of your Percepio trace in your README file.
+Removed from assignment requirements.
