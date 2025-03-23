@@ -51,10 +51,10 @@
 
 ### Unchanged HRS SRS
 
-- HRS 
-- HRS
-- SRS
-- SRS
+* HRS
+* HRS
+* SRS
+* SRS
 
 ### Modified HRS SRS
 
@@ -70,9 +70,9 @@ temp
 
 ## 2 Understanding the Starter Code
 
-1. What does “InitializeSerialConsole()” do? In said function, what is “cbufRx” and “cbufTx”? What type of data structure is it?
+### 1: What does “InitializeSerialConsole()” do? In said function, what is “cbufRx” and “cbufTx”? What type of data structure is it?
 
-* It initializes the UART circular buffers (RX and TX), configures the usart module and callback functions, set the priority for USART interrupts, and begins reading to the buffer.
+It initializes the UART circular buffers (RX and TX), configures the usart module and callback functions, set the priority for USART interrupts, and begins reading to the buffer.
 
 ``` c
 /**
@@ -95,7 +95,7 @@ void InitializeSerialConsole(void)
 }
 ```
 
-* cbufRx and cbufTx are circular buffer handlers: pointers to the circular buffer structure defined in circular_buffer.c
+cbufRx and cbufTx are circular buffer handlers: pointers to the circular buffer structure defined in circular_buffer.c
 
 ``` c
  // The definition of our circular buffer structure is hidden from the user
@@ -108,9 +108,9 @@ void InitializeSerialConsole(void)
  };
  ```
 
-1. How are “cbufRx” and “cbufTx” initialized? Where is the library that defines them (please list the *C file they come from).
+### 2: How are “cbufRx” and “cbufTx” initialized? Where is the library that defines them (please list the *C file they come from)
 
-* They are initialized by calling a function circular_but_init() with parameters cooresponding to rx and tx and their buffer sizes, respectively. This function is defined in circular_buffer.c. It creates an instance of the cbuf type struct using malloc to allocate sufficient memory on the heap. Then it sets the values of the elements of the struct accordingly with the parameters of the function call, and returns the newly created cbuf by reference (cbuf_handle_t is a pointer to the memory where the data is stored).
+They are initialized by calling a function circular_but_init() with parameters cooresponding to rx and tx and their buffer sizes, respectively. This function is defined in circular_buffer.c. It creates an instance of the cbuf type struct using malloc to allocate sufficient memory on the heap. Then it sets the values of the elements of the struct accordingly with the parameters of the function call, and returns the newly created cbuf by reference (cbuf_handle_t is a pointer to the memory where the data is stored).
 
 in serial console.c
 
@@ -152,10 +152,11 @@ cbuf_handle_t circular_buf_init(uint8_t* buffer, size_t size)
 }
 ```
 
-1. Where are the character arrays where the RX and TX characters are being stored at the end? Please mention their name and size.
+### 3: Where are the character arrays where the RX and TX characters are being stored at the end? Please mention their name and size
+
 Tip: Please note cBufRx and cBufTx are structures.
 
-* The characters are being stored in the data segment (global variables) in rxCharacterBuffer and txCharacterBuffer respectively. The size of each is defined by a corresponding macro: RX_BUFFER_SIZE and TX_BUFFER_SIZE. Each array is 512 characters.
+The characters are being stored in the data segment (global variables) in rxCharacterBuffer and txCharacterBuffer respectively. The size of each is defined by a corresponding macro: RX_BUFFER_SIZE and TX_BUFFER_SIZE. Each array is 512 characters.
 
 in SerialConsole.c
 
@@ -164,9 +165,9 @@ char rxCharacterBuffer[RX_BUFFER_SIZE];    ///< Buffer to store received charact
 char txCharacterBuffer[TX_BUFFER_SIZE];    ///< Buffer to store characters to be sent
 ```
 
-4. Where are the interrupts for UART character received and UART character sent defined?
+### 4: Where are the interrupts for UART character received and UART character sent defined?
 
-* The usart interrupt handler is defined in _usart_interrupt_handler. The interrupt handler function checks a variety of usart status codes to handle tx and rx communication by calling the approprate callback funtions based on system status.
+The usart interrupt handler is defined in _usart_interrupt_handler. The interrupt handler function checks a variety of usart status codes to handle tx and rx communication by calling the approprate callback funtions based on system status.
 
 in usart_interrupt.c
 
@@ -191,30 +192,31 @@ which is set to the be the handler function for the corresponding sercom in usar
 _sercom_set_handler(instance_index, _usart_interrupt_handler);
 ```
 
-5. What are the callback functions that are called when:
-   1. A character is received? (RX)
+### 5: What are the callback functions that are called when
 
-   * answer
+* A character is received? (RX)
 
-   1. A character has been sent? (TX)
+answer
 
-   * answer
+* A character has been sent? (TX)
 
-6. Explain what is being done on each of these two callbacks and how they relate to the cbufRx and cbufTx buffers.
+answer
 
-* answer
+### 6: Explain what is being done on each of these two callbacks and how they relate to the cbufRx and cbufTx buffers
 
-7. Draw a diagram that explains the program flow for UART receive – starting with the user typing a character and ending with how that characters ends up in the circular buffer “cbufRx”. Please make reference to specific functions in the starter code.
+answer
 
-* answer
+### 7: Draw a diagram that explains the program flow for UART receive – starting with the user typing a character and ending with how that characters ends up in the circular buffer “cbufRx”. Please make reference to specific functions in the starter code
 
-8. Draw a diagram that explains the program flow for the UART transmission – starting from a string added by the program to the circular buffer “cbufTx” and ending on characters being shown on the screen of a PC (On Teraterm, for example). Please make reference to specific functions in the starter code.
+answer
 
-* answer
+### 8: Draw a diagram that explains the program flow for the UART transmission – starting from a string added by the program to the circular buffer “cbufTx” and ending on characters being shown on the screen of a PC (On Teraterm, for example). Please make reference to specific functions in the starter code
 
-9. What is done on the function “startStasks()” in main.c? How many threads are started?
+answer
 
-* answer
+### 9: What is done on the function “startStasks()” in main.c? How many threads are started?
+
+answer
 
 ## 3 Debug Logger Module
 
