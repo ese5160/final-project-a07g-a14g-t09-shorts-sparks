@@ -71,7 +71,72 @@ temp
 ## 2 Understanding the Starter Code
 
 1. What does “InitializeSerialConsole()” do? In said function, what is “cbufRx” and “cbufTx”? What type of data structure is it?
+
+-  It initializes the UART circular buffers (RX and TX), configures the usart module and callback functions, set the priority for USART interrupts, and begins reading to the buffer.
+
+```
+/**
+ * @brief Initializes the UART and registers callbacks.
+ */
+void InitializeSerialConsole(void)
+{
+    // Initialize circular buffers for RX and TX
+	cbufRx = circular_buf_init((uint8_t *)rxCharacterBuffer, RX_BUFFER_SIZE);
+   cbufTx = circular_buf_init((uint8_t *)txCharacterBuffer, TX_BUFFER_SIZE);
+
+    // Configure USART and Callbacks
+	configure_usart();
+    configure_usart_callbacks();
+    NVIC_SetPriority(SERCOM4_IRQn, 10);
+
+    usart_read_buffer_job(&usart_instance, (uint8_t *)&latestRx, 1); // Kicks off constant reading of characters
+
+	// Add any other calls you need to do to initialize your Serial Console
+}
+```
+
+- cbufRx and cbufTx are circular buffer handlers, or pointers to the circular buffer defined in circular_buffer.c
+
+```
+ // The definition of our circular buffer structure is hidden from the user
+ struct circular_buf_t {
+	 uint8_t * buffer;
+	 size_t head;
+	 size_t tail;
+	 size_t max; //of the buffer
+	 bool full;
+ };
+ ```
+
 2. How are “cbufRx” and “cbufTx” initialized? Where is the library that defines them (please list the *C file they come from).
+
+- They are initialized by calling a function circular_but_init() with parameters cooresponding to rx and tx and their buffer sizes, respectively. This function is defined in circular_buffer.c. It creates an instance of the cbuf type struct using malloc to allocate sufficient memory on the heap. Then it sets the values of the elements of the struct accordingly with the parameters of the function call, and returns the newly created cbuf by reference (cbuf_handle_t is a pointer to the memory where the data is stored).
+
+in serial console.c
+```
+cbufRx = circular_buf_init((uint8_t *)rxCharacterBuffer, RX_BUFFER_SIZE);
+cbufTx = circular_buf_init((uint8_t *)txCharacterBuffer, TX_BUFFER_SIZE);
+```
+
+in circular_buffer.c
+```
+cbuf_handle_t circular_buf_init(uint8_t* buffer, size_t size)
+{
+	// assert(buffer && size);
+
+	 cbuf_handle_t cbuf = malloc(sizeof(circular_buf_t));
+	 //assert(cbuf);
+
+	 cbuf->buffer = buffer;
+	 cbuf->max = size;
+	 circular_buf_reset(cbuf);
+
+	// assert(circular_buf_empty(cbuf));
+
+	 return cbuf;
+}
+```
+
 3. Where are the character arrays where the RX and TX characters are being stored at the end? Please mention their name and size.
 Tip: Please note cBufRx and cBufTx are structures.
 4. Where are the interrupts for UART character received and UART character sent defined?
