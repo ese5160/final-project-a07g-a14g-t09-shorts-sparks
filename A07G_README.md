@@ -264,6 +264,29 @@ answer
 
 Commit your functioning Debug Logger Module to your GitHub repo, and make comments that are in Doxygen style.
 
+LogMessage() function completed in SerialConsole.c
+
+``` c
+/**
+ * @brief Logs a message at the specified debug level.
+ */
+void LogMessage(enum eDebugLogLevels level, const char *format, ...)
+{
+   if (level >= getLogLevel()) {
+      char buffer[TX_BUFFER_SIZE];  ///< Buffer to hold the formatted log message
+      va_list arguments;            ///< Variable argument list
+
+      // Start the argument list after format
+      va_start(arguments, format);   
+      // Reformat the message (safely) and store it in the buffer
+      vsnprintf(buffer, TX_BUFFER_SIZE, format, arguments);
+      // Send formatted message in variable buffer to serial console
+      SerialConsoleWriteString(buffer);
+      va_end(arguments);
+   }
+}
+```
+
 ## 4 Wiretap the convo
 
 ### Questions
