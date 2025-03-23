@@ -186,7 +186,9 @@ void _usart_interrupt_handler(uint8_t instance)
    }
 ```
 
-which is set to the be the handler function for the corresponding sercom in usart.c
+See line 451 of [usart_interrupt.c](<CLI Starter Code/src/ASF/sam0/drivers/sercom/usart/usart_interrupt.c>) for full function implementation.
+
+This is set to the be the handler function for the corresponding sercom in usart.c
 
 ``` c
 _sercom_set_handler(instance_index, _usart_interrupt_handler);
@@ -194,17 +196,57 @@ _sercom_set_handler(instance_index, _usart_interrupt_handler);
 
 ### 5: What are the callback functions that are called when
 
-* A character is received? (RX)
+#### A character is received? (RX)
 
-answer
+usart_read_callback()
 
-* A character has been sent? (TX)
+#### A character has been sent? (TX)
 
-answer
+usart_write_callback()
+
+``` c
+/******************************************************************************
+ * Callback Functions
+ ******************************************************************************/
+
+/**************************************************************************/ 
+/**
+ * @fn     void usart_read_callback(struct usart_module *const usart_module)
+ * @brief  Callback called when the system finishes receives all the bytes requested from a UART read job
+           Students to fill out. Please note that the code here is dummy code. It is only used to show you how some functions work.
+ * @note
+ *****************************************************************************/
+void usart_read_callback(struct usart_module *const usart_module)
+{
+   // ToDo: Complete this function 
+}
+
+/**************************************************************************/ 
+/**
+ * @fn         void usart_write_callback(struct usart_module *const usart_module)
+ * @brief      Callback called when the system finishes sending all the bytes requested from a UART read job
+ * @note
+ *****************************************************************************/
+void usart_write_callback(struct usart_module *const usart_module)
+{
+   if (circular_buf_get(cbufTx, (uint8_t *)&latestTx) != -1) // Only continue if there are more characters to send
+   {
+      usart_write_buffer_job(&usart_instance, (uint8_t *)&latestTx, 1);
+   }
+}
+```
 
 ### 6: Explain what is being done on each of these two callbacks and how they relate to the cbufRx and cbufTx buffers
 
-answer
+#### usart_read_callback()
+
+blah...
+cbufRx
+
+#### usart_write_callback()
+
+blah ..
+cbufTx
 
 ### 7: Draw a diagram that explains the program flow for UART receive – starting with the user typing a character and ending with how that characters ends up in the circular buffer “cbufRx”. Please make reference to specific functions in the starter code
 
@@ -226,9 +268,11 @@ Commit your functioning Debug Logger Module to your GitHub repo, and make commen
 
 ### Questions
 
-1. What nets must you attach the logic analyzer to? (Check how the firmware sets up the UART in SerialConsole.c!)
-2. Where on the circuit board can you attach / solder to?
-3. What are critical settings for the logic analyzer?
+#### 1: What nets must you attach the logic analyzer to? (Check how the firmware sets up the UART in SerialConsole.c!)
+
+#### 2: Where on the circuit board can you attach / solder to?
+
+#### 3: What are critical settings for the logic analyzer?
 
 ### Hardware Photo
 
