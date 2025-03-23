@@ -22,7 +22,7 @@
 Note All HRS and SRS are currently just from a00g, no updates made
 - Plan: have the entierly updated HRS SRS for new system first, then below have three addtiional categories for unchanged, modified, and new HRS/SRS respectively
 
-### Hardware Requirements Specification (HRS)
+### Updated Hardware Requirements Specification (HRS)
 
 #### H.1 Overview
 
@@ -57,7 +57,7 @@ There were be a micro SD card to hold the cnc instruction file (G-code). This is
 | HRS-10 | The system shall have status indicator LEDs on the PCB                                                                                              | N/A    |
 | HRS-11 | The system shall have a power (on/off) switch                                                                                                       | N/A    |
 
-### Software Requirements Specification (SRS)
+### Updated Software Requirements Specification (SRS)
 
 #### S.1 Overview
 
@@ -94,6 +94,12 @@ The users of our product are makers. From hobbyists simply looking to see their 
 | SRS-08 | The system shall be able to resume job from any paused state | N/A    |
 | SRS-09 | The user should be able to upload job file remotely through a portal on webpage | N/A    |
 | SRS-10 | An OTAFU should be implemented | N/A    |
+
+#### Unchanged HRS SRS
+
+#### Modified HRS SRS
+
+#### New HRS SRS
 
 ### Block Diagram for software tasks
 
