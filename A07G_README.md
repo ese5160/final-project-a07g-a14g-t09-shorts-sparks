@@ -17,31 +17,8 @@
 | Foam cyllinders 3d model prototypes |  Copper clad FR4 for milling PCB prototypes |
 | r(z), y, theta (cyllinder) cnc | x, y, z cnc |
 | Battery backup power in wall power outage case | Approved removal of battery as PCB milling times are faster so it is less expected and a less significant issue to lose power in the middle of a job |
-| Other updates? | .. |
-
-Note All HRS and SRS are currently just from a00g, no updates made
-- Plan: have the entierly updated HRS SRS for new system first, then below have three addtiional categories for unchanged, modified, and new HRS/SRS respectively
 
 ### Updated Hardware Requirements Specification (HRS)
-
-#### H.1 Overview
-
-In normal operation, the router will be powered from a wall outlet, simultaneously charging the backup battery if necessary. On a power outage, the power source will switch to the battery. On detecting this switch the motors will not operate and the job will be paused.
-
-The router will have motors to control the orientation of the material being shaped and the position and speed of a drill bit that will perform the subtractive manufacturing operation. In total, the router will use 4 motors: three stepper motors and 1 DC motor. The DC motor will control the speed of the drill bit rotation. One stepper will be attached along the z axis of the cyllindrical material, and this motor will control its theta axis or rotational orientation. The drill bit will be perpendicular to both the z axis of the material and the plane of the macine base plate. One stepper will act as a linear actuator, rotating a threaded rod that is parallel to the material z axis and ofset above the material. This linear actuaor also holds the drill bit jig, thereby moving the head of the drill bit. The final stepper motor will similarly act as a linear actuator to move the drill bit up and down in the direction it points.
-
-We plan on using encoders as sensors on each stepper motor. We would like to design a custom closed loop feedback PCB (1 per motor in final assembly). This board would include a motor driver, an additional MCU, and a thermistor.
-
-There were be a micro SD card to hold the cnc instruction file (G-code). This is also where current job progress will be stored in any pausing scenario.
-
-#### H.2 Definitions, Abbreviations
-
-| Term   | Definition                                                                          |
-| ------ | ----------------------------------------------------------------------------------- |
-| CNC    | Computer Numerical Control                                                          |
-| G-code | set of instructions a CNC controller uses to tells the motors where and how to move |
-
-#### H.3 Functionality
 
 | Req ID | Requirement | Review |
 | ------ | ----------- | ------ |
@@ -59,29 +36,6 @@ There were be a micro SD card to hold the cnc instruction file (G-code). This is
 
 ### Updated Software Requirements Specification (SRS)
 
-#### S.1 Overview
-
-The user interface will contain a upload portal to send the machining file. It will also contain some matchine settings that the user will adjust before beginning the job. The interface will have control button such as start and pause. There will also be status details such as idle/waiting for a job, actively running, finished job on machine, and paused due to power outage.
-
-On a power outage, the job will be paused. The current state of the system will be stored, and upon restoration of primary power, router motors will reset and restore the proper position.
-
-The addition MCUs in the closed loop stepper motor module will run on bare metal to process the encoder data in a control loop. The main board's MCU (running the RTOS) will communicate with each of these boards over I2C, sending the sub-instructions to each motor's MCU from the overall g-code that determines all of the necessary operations. This MCU will then interface with the motor controller, including the feedback loop. The thermistor will be used to monitor thermals.
-
-The G-code instructions, stored on the micro SD card, will be iteratively accessed (SPI) and distributed as the machine operates.
-
-#### S.2 Users
-
-The users of our product are makers. From hobbyists simply looking to see their designs in real life to designer seeking rapid prototyping, our CNC router gets the job done. **By Makers. For Makers.**
-
-#### S.3 Definitions, Abbreviations
-
-| Term  | Definition                   |
-| ----- | ---------------------------- |
-| OTAFU | over the air firmware update |
-| RTOS  | real time operating system   |
-
-#### S.4 Functionality
-
 | Req ID | Requirement | Review |
 | ------ | ----------- | ------ |
 | SRS-01 | The system shall be able to control all 3 stepper motors in its cyllindrical coordinates | N/A    |
@@ -95,11 +49,16 @@ The users of our product are makers. From hobbyists simply looking to see their 
 | SRS-09 | The user should be able to upload job file remotely through a portal on webpage | N/A    |
 | SRS-10 | An OTAFU should be implemented | N/A    |
 
-#### Unchanged HRS SRS
+### Unchanged HRS SRS
 
-#### Modified HRS SRS
+- HRS 
+- HRS
+- SRS
+- SRS
 
-#### New HRS SRS
+### Modified HRS SRS
+
+### New HRS SRS
 
 ### Block Diagram for software tasks
 
