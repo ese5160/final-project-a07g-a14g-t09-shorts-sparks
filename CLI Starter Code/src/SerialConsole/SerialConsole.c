@@ -151,14 +151,15 @@ void setLogLevel(enum eDebugLogLevels debugLevel)
  */
 void LogMessage(enum eDebugLogLevels level, const char *format, ...)
 {
-    // Todo: Implement Debug Logger
-	// More detailed descriptions are in header file
-
 	if (level >= getLogLevel()) {
-		char buffer[TX_BUFFER_SIZE];
-		va_list arguments;
-		va_start(arguments, format);
+		char buffer[TX_BUFFER_SIZE];  ///< Buffer to hold the formatted log message
+		va_list arguments;            ///< Variable argument list
+
+		// Start the argument list after format
+		va_start(arguments, format);   
+		// Reformat the message (safely) and store it in the buffer
 		vsnprintf(buffer, TX_BUFFER_SIZE, format, arguments);
+		// Send formatted message in variable buffer to serial console
 		SerialConsoleWriteString(buffer);
 		va_end(arguments);
 	}
