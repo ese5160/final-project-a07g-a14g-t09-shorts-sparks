@@ -370,6 +370,33 @@ Both PB10 and PB11 are broken out to the header block on the xplained pro dev bo
 
 The critical setting for the logic analyzer are setting both pins active and setting them up with async serial analyzers. In the async serial analyzer, the most crictal settings are the baud/bit rate and other settings defiing the implementation of the UART protocol, including bits per frame, number of stop bit, parity bit presence or lack thereof, LSB/MSB ordering, and signal inverting.
 
+From usart.c we can see the protocol defaults, which were set initially in the configure_usart() function, which then redefines baud rate to 115200 and sets the pad/pins to finish configuring the hardware module.
+
+``` c
+/**
+ * \brief Initializes the device to predefined defaults
+ *
+ * Initialize the USART device to predefined defaults:
+ * - 8-bit asynchronous USART
+ * - No parity
+ * - One stop bit
+ * - 9600 baud
+ * - Transmitter enabled
+ * - Receiver enabled
+ * - GCLK generator 0 as clock source
+ * - Default pin configuration
+ *
+ * The configuration struct will be updated with the default
+ * configuration.
+ *
+ * \param[in,out] config  Pointer to configuration struct
+ */
+static inline void usart_get_config_defaults(
+		struct usart_config *const config) {/*omitted*/}
+```
+
+These protocol defaults are reflected in the settings chosen for the logic analyzer, shown in the screenshots below.
+
 Channel 1: **RX**
 
 ![alt text](A07G_images/Channel_1_RX.png)
