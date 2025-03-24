@@ -21,16 +21,18 @@
 ### Updated Hardware Requirements Specification (HRS)
 
 | Req ID | Requirement | Review |
-| ----- | ---------- | ------ |
+| ------ | ----------- | ------ |
 | HRS-01 | The CNC router shall use 3 stepper motors to control X, Y, Z axis | N/A |
-| HRS-02 | The CNC router shall use 1 DC motor for spindle  | N/A    |
-| HRS-03 | The system shall have external non-voilatile memory (microSD) of no less than 512MB for storing G-code and current progress (in any pause scenario) | N/A    |
-| HRS-04 | The CNC router shall be able to cut foam material                                                                                                   | N/A    |
-| HRS-05 | The CNC shall have a milling volume of 300cm^3 (similar to a can of coke)                                                                           | N/A    |
-| HRS-06 | The CNC shall run off a wall outlet during operation                                                                                                | N/A    |
-| HRS-07 | The CNC shall run off a single cell Li-Ion battery (3.7V nominal voltage) during power outage (sleep mode)                                          | N/A    |
-| HRS-08 | The system shall use the SAMW25 as the microcontroller and Wi-Fi communication IC                                                                   | N/A    |
-| HRS-09 | The stepper motors shall use encoders for closed loop feedback                                                                                      | N/A    |
+| HRS-02 | The CNC router shall use 1 DC motor for spindle  | N/A |
+| HRS-03 | The system shall have external non-voilatile memory (microSD) of no less than 512MB for storing G-code and current progress (in any pause scenario) | N/A |
+| HRS-04 | The CNC router shall be able to engrave FR4 copper boards | N/A |
+| HRS-05 | The CNC shall have a milling area of at least 100 by 70mm (most common FR4 board size) | N/A |
+| HRS-06 | The CNC should have a milling area of at least 150 by 100mm (some larger boards have this dimention)| N/A |
+| HRS-07 | The CNC shall run off a wall outlet during operation | N/A |
+| HRS-08 | The CNC shall operate on 24V DC and draw no more than 10 A | N/A |
+| HRS-09 | The system shall use the SAMW25 as the main microcontroller and Wi-Fi communication IC | N/A |
+| HRS-10 | The stepper motors shall use encoders for closed loop feedback | N/A |
+| HRS-11 | a SAMD21 shall handle the closed loop control for weach axis | N/A |
 | HRS-10 | The system shall have status indicator LEDs on the PCB                                                                                              | N/A    |
 | HRS-11 | The system shall have a power (on/off) switch                                                                                                       | N/A    |
 
