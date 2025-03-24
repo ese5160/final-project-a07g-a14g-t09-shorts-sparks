@@ -23,19 +23,23 @@
 | Req ID | Requirement | Review |
 | ------ | ----------- | ------ |
 | HRS-01 | The CNC router shall use 3 stepper motors to control X, Y, Z axis | N/A |
-| HRS-02 | The CNC router shall use 1 DC motor for spindle  | N/A |
-| HRS-03 | The system shall have external non-voilatile memory (microSD) of no less than 512MB for storing G-code and current progress (in any pause scenario) | N/A |
-| HRS-04 | The CNC router shall be able to engrave FR4 copper boards | N/A |
-| HRS-05 | The CNC shall have a milling area of at least 100 by 70mm (most common FR4 board size) | N/A |
-| HRS-06 | The CNC should have a milling area of at least 150 by 100mm (some larger boards have this dimention)| N/A |
-| HRS-07 | The CNC shall run off a wall outlet during operation | N/A |
-| HRS-08 | The CNC shall operate on 24V DC and draw no more than 10 A | N/A |
-| HRS-09 | The system shall use the SAMW25 as the main microcontroller and Wi-Fi communication IC | N/A |
-| HRS-10 | The stepper motors shall use encoders for closed loop feedback | N/A |
-| HRS-11 | A SAMD21 for each axis shall handle the closed loop control | N/A |
-| HRS-12 | The system shall have user buttons the PCB | N/A |
-| HRS-13 | The system shall have status indicator LEDs on the PCB | N/A |
-| HRS-14 | The system shall have a power (on/off) switch | N/A |
+| HRS-02 | The CNC router shall use 1 DC motor for spindle | N/A |
+| HRS-03 | The DC spindle shall be driven with a mosfet driver to allow for PWM speed control | N/A |
+| HRS-04 | The system shall have external non-voilatile memory (microSD) of no less than 512MB for storing G-code and current progress (in any pause scenario) | N/A |
+| HRS-05 | The CNC router shall be able to engrave FR4 copper boards | N/A |
+| HRS-06 | The CNC shall have a milling area of at least 100 by 70mm (most common FR4 board size) | N/A |
+| HRS-07 | The CNC should have a milling area of at least 150 by 100mm (some larger boards have this dimention)| N/A |
+| HRS-08 | The CNC shall have a veritcal Z axis travel of at least 30mm (length of an engraving bit) | N/A |
+| HRS-09 | The CNC shall run off a wall outlet during operation | N/A |
+| HRS-10 | The CNC shall operate on 24V DC and draw no more than 10 A | N/A |
+| HRS-11 | The system shall use the SAMW25 as the main microcontroller and Wi-Fi communication IC | N/A |
+| HRS-12 | The stepper motors shall use encoders for closed loop feedback | N/A |
+| HRS-13 | A SAMD21 for each axis shall handle the closed loop control | N/A |
+| HRS-14 | Each axis shall have limit switches | N/A |
+| HRS-15 | Each axis shall use a leadscrew drive with linear rods for accuracy and rigidity | N/A |
+| HRS-16 | The system shall have user buttons on the PCB | N/A |
+| HRS-17 | The system shall have status indicator LEDs on the PCB | N/A |
+| HRS-18 | The system shall have a power (on/off) switch | N/A |
 
 ### Updated Software Requirements Specification (SRS)
 
@@ -51,17 +55,6 @@
 | SRS-08 | The system shall be able to resume job from any paused state | N/A    |
 | SRS-09 | The user should be able to upload job file remotely through a portal on webpage | N/A    |
 | SRS-10 | An OTAFU should be implemented | N/A    |
-
-### Unchanged HRS SRS
-
-* HRS
-* HRS
-* SRS
-* SRS
-
-### Modified HRS SRS
-
-### New HRS SRS
 
 ### Block Diagram for software tasks
 
