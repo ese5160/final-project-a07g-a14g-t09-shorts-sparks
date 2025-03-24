@@ -407,7 +407,7 @@ Channel 2: **TX**
 
 ### Hardware Photo
 
-Submit a photo of your hardware connections between the SAMW25 Xplained dev board and the logic analyzer.
+![alt text](<A07G_images/Hardware Connections.png>)
 
 ### Decoded Screenshot
 
