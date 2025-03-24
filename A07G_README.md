@@ -32,9 +32,10 @@
 | HRS-08 | The CNC shall operate on 24V DC and draw no more than 10 A | N/A |
 | HRS-09 | The system shall use the SAMW25 as the main microcontroller and Wi-Fi communication IC | N/A |
 | HRS-10 | The stepper motors shall use encoders for closed loop feedback | N/A |
-| HRS-11 | a SAMD21 shall handle the closed loop control for weach axis | N/A |
-| HRS-10 | The system shall have status indicator LEDs on the PCB                                                                                              | N/A    |
-| HRS-11 | The system shall have a power (on/off) switch                                                                                                       | N/A    |
+| HRS-11 | A SAMD21 for each axis shall handle the closed loop control | N/A |
+| HRS-12 | The system shall have user buttons the PCB | N/A |
+| HRS-13 | The system shall have status indicator LEDs on the PCB | N/A |
+| HRS-14 | The system shall have a power (on/off) switch                                                                                                       | N/A    |
 
 ### Updated Software Requirements Specification (SRS)
 
