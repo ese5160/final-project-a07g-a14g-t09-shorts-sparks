@@ -256,7 +256,34 @@ answer
 
 ### 9: What is done on the function “startStasks()” in main.c? How many threads are started?
 
-answer
+There is a StartTasks() function in main.c that gets and prints (to serial console) the current free heap size before starting the tasks, initizlizes tasks and gets and prints coorepsponding free heap size after each task. Currently, there is only one thread started, the CLI_TASK.
+
+``` c
+/**************************************************************************/ 
+/**
+ * function          StartTasks
+ * @brief            Initialize application tasks in this function
+ * @details
+ * @param[in]        None
+ * @return           None
+ *****************************************************************************/
+static void StartTasks(void)
+{
+
+	snprintf(bufferPrint, 64, "Heap before starting tasks: %d\r\n", xPortGetFreeHeapSize());
+	SerialConsoleWriteString(bufferPrint);
+
+	// CODE HERE: Initialize any Tasks in your system here
+
+	if (xTaskCreate(vCommandConsoleTask, "CLI_TASK", CLI_TASK_SIZE, NULL, CLI_PRIORITY, &cliTaskHandle) != pdPASS)
+	{
+		SerialConsoleWriteString("ERR: CLI task could not be initialized!\r\n");
+	}
+
+	snprintf(bufferPrint, 64, "Heap after starting CLI: %d\r\n", xPortGetFreeHeapSize());
+	SerialConsoleWriteString(bufferPrint);
+}
+```
 
 ## 3 Debug Logger Module
 
@@ -291,9 +318,56 @@ void LogMessage(enum eDebugLogLevels level, const char *format, ...)
 
 #### 1: What nets must you attach the logic analyzer to? (Check how the firmware sets up the UART in SerialConsole.c!)
 
+
+in SerialConsole.c
+
+``` c
+static void configure_usart(void)
+{
+	struct usart_config config_usart;
+	usart_get_config_defaults(&config_usart);
+
+	config_usart.baudrate = 115200;
+	config_usart.mux_setting = EDBG_CDC_SERCOM_MUX_SETTING;
+	config_usart.pinmux_pad0 = EDBG_CDC_SERCOM_PINMUX_PAD0;
+	config_usart.pinmux_pad1 = EDBG_CDC_SERCOM_PINMUX_PAD1;
+	config_usart.pinmux_pad2 = EDBG_CDC_SERCOM_PINMUX_PAD2;
+	config_usart.pinmux_pad3 = EDBG_CDC_SERCOM_PINMUX_PAD3;
+	while (usart_init(&usart_instance,
+					  EDBG_CDC_MODULE,
+					  &config_usart) != STATUS_OK)
+	{
+	}
+
+	usart_enable(&usart_instance);
+}
+```
+
+right click and finding the definition for any of the EDBG_CDC_Sercom ... macros leads to the following:
+
+in samw25_xplained_pro.h
+
+``` c
+/** \name Embedded debugger CDC Gateway USART interface definitions
+ * @{
+ */
+#define EDBG_CDC_MODULE SERCOM4
+#define EDBG_CDC_SERCOM_MUX_SETTING USART_RX_3_TX_2_XCK_3
+#define EDBG_CDC_SERCOM_PINMUX_PAD0 PINMUX_UNUSED
+#define EDBG_CDC_SERCOM_PINMUX_PAD1 PINMUX_UNUSED
+#define EDBG_CDC_SERCOM_PINMUX_PAD2 PINMUX_PB10D_SERCOM4_PAD2
+#define EDBG_CDC_SERCOM_PINMUX_PAD3 PINMUX_PB11D_SERCOM4_PAD3
+```
+
+This shows that we are using SERCOM4, with RX on PAD 3 and pin PB11, and with TX on PAD 2 and pin PB10
+
 #### 2: Where on the circuit board can you attach / solder to?
 
+Both PB10 and PB11 are broken out to the header block on the xplained pro dev board, so connections can be attached to these header pins.
+
 #### 3: What are critical settings for the logic analyzer?
+
+
 
 ### Hardware Photo
 
