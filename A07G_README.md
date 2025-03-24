@@ -384,7 +384,7 @@ Submit a photo of your hardware connections between the SAMW25 Xplained dev boar
 
 ### Decoded Screenshot
 
-![alt text](A07G_images/A07G_uart.png)
+![alt text](A07G_images/A07G_uart_w_terminal.png)
 
 ### Small Capture .sal file
 
