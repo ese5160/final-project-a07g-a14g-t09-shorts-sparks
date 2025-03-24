@@ -21,9 +21,9 @@
 ### Updated Hardware Requirements Specification (HRS)
 
 | Req ID | Requirement | Review |
-| ------ | ----------- | ------ |
-| HRS-01 | The CNC router shall use 3 stepper motors to control one rotational axis and 2 linear axis (cylindrical coordinates) | N/A |
-| HRS-02 | The CNC router shall use 1 DC motor for spindle                                                                                                     | N/A    |
+| ----- | ---------- | ------ |
+| HRS-01 | The CNC router shall use 3 stepper motors to control X, Y, Z axis | N/A |
+| HRS-02 | The CNC router shall use 1 DC motor for spindle  | N/A    |
 | HRS-03 | The system shall have external non-voilatile memory (microSD) of no less than 512MB for storing G-code and current progress (in any pause scenario) | N/A    |
 | HRS-04 | The CNC router shall be able to cut foam material                                                                                                   | N/A    |
 | HRS-05 | The CNC shall have a milling volume of 300cm^3 (similar to a can of coke)                                                                           | N/A    |
