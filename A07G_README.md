@@ -53,8 +53,13 @@
 | SRS-06 | The system shall be able to automatically pause the job when hitting limit switch | N/A    |
 | SRS-07 | The system shall be able to perform X/Y zeroing (calibration) with limit switches | N/A    |
 | SRS-08 | The system shall be able to automatically perform bed level calibration using the contuctive nature of the endmill and copper FR4 board | N/A    |
-| SRS-09 | The user should be able to upload job file remotely through a portal on webpage | N/A    |
-| SRS-10 | An OTAFU should be implemented | N/A    |
+| SRS-09 | The webpage portal shall handle remote uploading of jobs | N/A    |
+| SRS-10 | The webpage portal shall handle GCode generation from PCB gerber files leveraging existing software (e.g. FlatCAM) | N/A    |
+| SRS-11 | The webpage portal shall handle GCode to motor instruction conversion | N/A    |
+| SRS-12 | An OTAFU shall be implemented | N/A    |
+| SRS-13 | A CLI shall be implemented | N/A    |
+| SRS-04 | The communication between MCUs shall use I2C (and some gpio) | N/A    |
+| SRS-05 | The communication between MUC and SD card shall use SPI | N/A    |
 
 ### Block Diagram for software tasks
 
