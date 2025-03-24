@@ -388,7 +388,7 @@ From usart.c we can see the protocol defaults, which were set initially in the c
  * \param[in,out] config  Pointer to configuration struct
  */
 static inline void usart_get_config_defaults(
-		struct usart_config *const config) {/*omitted*/}
+      struct usart_config *const config) {/*omitted*/}
 ```
 
 These protocol defaults are reflected in the settings chosen for the logic analyzer, shown in the screenshots below.
