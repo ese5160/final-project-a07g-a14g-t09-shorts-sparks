@@ -270,18 +270,18 @@ There is a StartTasks() function in main.c that gets and prints (to serial conso
 static void StartTasks(void)
 {
 
-	snprintf(bufferPrint, 64, "Heap before starting tasks: %d\r\n", xPortGetFreeHeapSize());
-	SerialConsoleWriteString(bufferPrint);
+   snprintf(bufferPrint, 64, "Heap before starting tasks: %d\r\n", xPortGetFreeHeapSize());
+   SerialConsoleWriteString(bufferPrint);
 
-	// CODE HERE: Initialize any Tasks in your system here
+   // CODE HERE: Initialize any Tasks in your system here
 
-	if (xTaskCreate(vCommandConsoleTask, "CLI_TASK", CLI_TASK_SIZE, NULL, CLI_PRIORITY, &cliTaskHandle) != pdPASS)
-	{
-		SerialConsoleWriteString("ERR: CLI task could not be initialized!\r\n");
-	}
+   if (xTaskCreate(vCommandConsoleTask, "CLI_TASK", CLI_TASK_SIZE, NULL, CLI_PRIORITY, &cliTaskHandle) != pdPASS)
+   {
+      SerialConsoleWriteString("ERR: CLI task could not be initialized!\r\n");
+   }
 
-	snprintf(bufferPrint, 64, "Heap after starting CLI: %d\r\n", xPortGetFreeHeapSize());
-	SerialConsoleWriteString(bufferPrint);
+   snprintf(bufferPrint, 64, "Heap after starting CLI: %d\r\n", xPortGetFreeHeapSize());
+   SerialConsoleWriteString(bufferPrint);
 }
 ```
 
@@ -318,28 +318,27 @@ void LogMessage(enum eDebugLogLevels level, const char *format, ...)
 
 #### 1: What nets must you attach the logic analyzer to? (Check how the firmware sets up the UART in SerialConsole.c!)
 
-
 in SerialConsole.c
 
 ``` c
 static void configure_usart(void)
 {
-	struct usart_config config_usart;
-	usart_get_config_defaults(&config_usart);
+   struct usart_config config_usart;
+   usart_get_config_defaults(&config_usart);
 
-	config_usart.baudrate = 115200;
-	config_usart.mux_setting = EDBG_CDC_SERCOM_MUX_SETTING;
-	config_usart.pinmux_pad0 = EDBG_CDC_SERCOM_PINMUX_PAD0;
-	config_usart.pinmux_pad1 = EDBG_CDC_SERCOM_PINMUX_PAD1;
-	config_usart.pinmux_pad2 = EDBG_CDC_SERCOM_PINMUX_PAD2;
-	config_usart.pinmux_pad3 = EDBG_CDC_SERCOM_PINMUX_PAD3;
-	while (usart_init(&usart_instance,
-					  EDBG_CDC_MODULE,
-					  &config_usart) != STATUS_OK)
-	{
-	}
+   config_usart.baudrate = 115200;
+   config_usart.mux_setting = EDBG_CDC_SERCOM_MUX_SETTING;
+   config_usart.pinmux_pad0 = EDBG_CDC_SERCOM_PINMUX_PAD0;
+   config_usart.pinmux_pad1 = EDBG_CDC_SERCOM_PINMUX_PAD1;
+   config_usart.pinmux_pad2 = EDBG_CDC_SERCOM_PINMUX_PAD2;
+   config_usart.pinmux_pad3 = EDBG_CDC_SERCOM_PINMUX_PAD3;
+   while (usart_init(&usart_instance,
+                 EDBG_CDC_MODULE,
+                 &config_usart) != STATUS_OK)
+   {
+   }
 
-	usart_enable(&usart_instance);
+   usart_enable(&usart_instance);
 }
 ```
 
@@ -359,7 +358,9 @@ in samw25_xplained_pro.h
 #define EDBG_CDC_SERCOM_PINMUX_PAD3 PINMUX_PB11D_SERCOM4_PAD3
 ```
 
-This shows that we are using SERCOM4, with RX on PAD 3 and pin PB11, and with TX on PAD 2 and pin PB10
+This shows that we are using SERCOM4, with RX on PAD 3 and pin PB11, and with TX on PAD 2 and pin PB10. Additonally, at least one ground connection must be made to the logic analyzer to share common ground between the samw system and the logic anlyzer. All channels' grounds are internally connected in the logic anlyzer so a single ground connection suffices.
+
+Alternatively, pins could be soldered onto the 3 pin UART Debug section that has GND, TX, RX, but for soldering simplicity, I will try to use the existing header pins first.
 
 #### 2: Where on the circuit board can you attach / solder to?
 
@@ -367,7 +368,15 @@ Both PB10 and PB11 are broken out to the header block on the xplained pro dev bo
 
 #### 3: What are critical settings for the logic analyzer?
 
+The critical setting for the logic analyzer are setting both pins active and setting them up with async serial analyzers. In the async serial analyzer, the most crictal settings are the baud/bit rate and other settings defiing the implementation of the UART protocol, including bits per frame, number of stop bit, parity bit presence or lack thereof, LSB/MSB ordering, and signal inverting.
 
+Channel 1: **RX**
+
+![alt text](A07G_images/Channel_1_RX.png)
+
+Channel 2: **TX**
+
+![alt text](A07G_images/Channel_2_TX.png)
 
 ### Hardware Photo
 
@@ -375,11 +384,11 @@ Submit a photo of your hardware connections between the SAMW25 Xplained dev boar
 
 ### Decoded Screenshot
 
-Submit a screenshot of the decoded message.
+![alt text](A07G_images/A07G_uart.png)
 
 ### Small Capture .sal file
 
-Submit a small capture file (i.e., the .sal file) of a wiretapped conversation (you don’t need to log 30 minutes worth of UART messages 🙂)
+[SAL file for capture before entire CLI implementation (just the startup messages)](A07G_images/A07G_uart.sal)
 
 ## 5 Complete the CLI
 
