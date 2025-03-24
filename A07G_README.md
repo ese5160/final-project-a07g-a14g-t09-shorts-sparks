@@ -240,15 +240,11 @@ void usart_write_callback(struct usart_module *const usart_module)
 
 #### usart_read_callback()
 
-blah...
-cbufRx
-
-james_branch test
+This callback function processes data received on RX by reading from what is stored in the cbufRx buffer, until the reading pointer meets to the write/data pointer.
 
 #### usart_write_callback()
 
-blah ..
-cbufTx
+This callback function processes data to send on TX by reading from what is stored in the cbufTx buffer. If there are more characters to send, it will continue the transmission on TX.
 
 ### 7: Draw a diagram that explains the program flow for UART receive – starting with the user typing a character and ending with how that characters ends up in the circular buffer “cbufRx”. Please make reference to specific functions in the starter code
 
