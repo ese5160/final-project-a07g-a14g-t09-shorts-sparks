@@ -35,7 +35,7 @@
 | HRS-11 | A SAMD21 for each axis shall handle the closed loop control | N/A |
 | HRS-12 | The system shall have user buttons the PCB | N/A |
 | HRS-13 | The system shall have status indicator LEDs on the PCB | N/A |
-| HRS-14 | The system shall have a power (on/off) switch                                                                                                       | N/A    |
+| HRS-14 | The system shall have a power (on/off) switch | N/A |
 
 ### Updated Software Requirements Specification (SRS)
 
