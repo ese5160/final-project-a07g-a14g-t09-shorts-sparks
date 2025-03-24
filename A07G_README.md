@@ -45,14 +45,14 @@
 
 | Req ID | Requirement | Review |
 | ------ | ----------- | ------ |
-| SRS-01 | The system shall be able to control all 3 stepper motors in its cyllindrical coordinates | N/A    |
+| SRS-01 | The system shall be able to control all 3 stepper motors in its cartesian coordinates | N/A    |
 | SRS-02 | The MCU in the SAMW25 module shall run an RTOS | N/A    |
 | SRS-03 | The user shall be able to remotely operate the machine, setting presets, start/pause etc | N/A    |
 | SRS-04 | The system shall be able to send status updates and job progress to the web portal for the user | N/A    |
 | SRS-05 | The system shall be able to read and interoperate encoder values as positions | N/A    |
-| SRS-06 | The system shall be able to automatically pause the job when power loss/overheat | N/A    |
-| SRS-07 | The system shall be able to perform zeroing (calibration) | N/A    |
-| SRS-08 | The system shall be able to resume job from any paused state | N/A    |
+| SRS-06 | The system shall be able to automatically pause the job when hitting limit switch | N/A    |
+| SRS-07 | The system shall be able to perform X/Y zeroing (calibration) with limit switches | N/A    |
+| SRS-08 | The system shall be able to automatically perform bed level calibration using the contuctive nature of the endmill and copper FR4 board | N/A    |
 | SRS-09 | The user should be able to upload job file remotely through a portal on webpage | N/A    |
 | SRS-10 | An OTAFU should be implemented | N/A    |
 
