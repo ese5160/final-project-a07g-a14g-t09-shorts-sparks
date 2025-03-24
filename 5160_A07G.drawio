@@ -64,7 +64,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="69AIFionqCU4KmpSsLqw" name="q8">
-    <mxGraphModel dx="2122" dy="816" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="2318" dy="942" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -83,50 +83,49 @@
         <mxCell id="Xbnj1MWFN5TdDOYCEd9Z-4" value="via `circular_buffer_get(&amp;cbufTx, *(uint8_t* )&amp;latestTx)`" style="text;whiteSpace=wrap;" vertex="1" parent="1">
           <mxGeometry x="-140" y="290" width="240" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="Xbnj1MWFN5TdDOYCEd9Z-5" value="Sanity checks and Length not 0, transmitter enabled" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="160" y="360" width="120" height="60" as="geometry" />
-        </mxCell>
         <mxCell id="Xbnj1MWFN5TdDOYCEd9Z-6" value="_usart_write_buffer(module, tx_data, length)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="160" y="440" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="Xbnj1MWFN5TdDOYCEd9Z-7" value="Sanity checks and not busy.&lt;br&gt;Write values to the usart hardware module" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="160" y="520" width="120" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="Xbnj1MWFN5TdDOYCEd9Z-8" value="Enable data register emty interrupt" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="Xbnj1MWFN5TdDOYCEd9Z-8" value="Write values to the usart hardware module and enable data register empty interrupt" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="160" y="600" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="Xbnj1MWFN5TdDOYCEd9Z-9" value="Data transmitted over tx until register empty" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="160" y="680" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="Xbnj1MWFN5TdDOYCEd9Z-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="Xbnj1MWFN5TdDOYCEd9Z-10" target="Xbnj1MWFN5TdDOYCEd9Z-7">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="Xbnj1MWFN5TdDOYCEd9Z-13" value="business" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="Xbnj1MWFN5TdDOYCEd9Z-12">
-          <mxGeometry x="-0.3383" y="3" relative="1" as="geometry">
-            <mxPoint as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="Xbnj1MWFN5TdDOYCEd9Z-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="Xbnj1MWFN5TdDOYCEd9Z-10" target="Xbnj1MWFN5TdDOYCEd9Z-2">
+        <mxCell id="LdzH9NjF2yEKKVFPIRz5-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="Xbnj1MWFN5TdDOYCEd9Z-10" target="Xbnj1MWFN5TdDOYCEd9Z-9">
           <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="-210" y="710" />
-              <mxPoint x="-210" y="210" />
-            </Array>
+            <mxPoint x="20" y="770" as="sourcePoint" />
+            <mxPoint x="220" y="770" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Xbnj1MWFN5TdDOYCEd9Z-15" value="Status is busy?" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="Xbnj1MWFN5TdDOYCEd9Z-14">
-          <mxGeometry x="-0.2095" y="3" relative="1" as="geometry">
+        <mxCell id="LdzH9NjF2yEKKVFPIRz5-2" value="Wait for correct interrupt" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="LdzH9NjF2yEKKVFPIRz5-1">
+          <mxGeometry x="-0.0222" y="3" relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Xbnj1MWFN5TdDOYCEd9Z-10" value="DRE interrupt fires" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="Xbnj1MWFN5TdDOYCEd9Z-10" value="_usart_interrupt_handler&lt;div&gt;...&lt;/div&gt;&lt;div&gt;if(interrupt_status &amp;amp; SERCOM_USART_INTFLAG_DRE)&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="-40" y="680" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="Xbnj1MWFN5TdDOYCEd9Z-16" value="Start:&lt;div&gt;String added to cbufTx&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
           <mxGeometry x="260" y="80" width="80" height="80" as="geometry" />
         </mxCell>
         <mxCell id="Xbnj1MWFN5TdDOYCEd9Z-17" value="End:&lt;div&gt;char(s) shown on PC&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
-          <mxGeometry x="260" y="760" width="80" height="80" as="geometry" />
+          <mxGeometry x="320" y="1000" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="LdzH9NjF2yEKKVFPIRz5-3" value="Hardware UART conversion to USB on SAMW25 xplained board" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="760" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Uvlkl3ubx4em00gA9COW-1" value="USB message to computer COM" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="840" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="JG7suds1NpdHCkEHtWQR-1" value="COM / terminal interpret USB inputs" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="920" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="JG7suds1NpdHCkEHtWQR-2" value="Sanity checks and Length not 0, transmitter enabled" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="180" y="350" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="JG7suds1NpdHCkEHtWQR-3" value="Sanity checks and not busy." style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="180" y="510" width="80" height="80" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
