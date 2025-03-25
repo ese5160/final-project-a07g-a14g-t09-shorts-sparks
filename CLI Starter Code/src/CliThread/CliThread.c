@@ -14,12 +14,16 @@
 /******************************************************************************
  * Defines
  ******************************************************************************/
+#define SEMAPHORE_RX_MAX_COUNT 4096 ///< max number of characters countable in buffer
 
 /******************************************************************************
  * Variables
  ******************************************************************************/
-static int8_t *const pcWelcomeMessage =
-    "FreeRTOS CLI.\r\nType Help to view a list of registered commands.\r\n";
+SemaphoreHandle_t xSemaphoreRX;	///< create a semaphore handle for managing read/write from RX circular buffer
+
+extern cbuf_handle_t cbufRx;					///< the circular buffer is initialized elsewhere
+
+static char * const pcWelcomeMessage = "FreeRTOS CLI.\r\nType Help to view a list of registered commands.\r\n";
 
 // Clear screen command
 const CLI_Command_Definition_t xClearScreen =
@@ -35,6 +39,20 @@ static const CLI_Command_Definition_t xResetCommand =
         "reset: Resets the device\r\n",
         (const pdCOMMAND_LINE_CALLBACK)CLI_ResetDevice,
         0};
+
+static const CLI_Command_Definition_t xVersionCommand =
+	{
+		"version",
+		"version: Prints Firmware version number\r\n",
+		(const pdCOMMAND_LINE_CALLBACK)CLI_Version,
+		0};
+
+static const CLI_Command_Definition_t xTicksCommand =
+	{
+		"ticks",
+		"ticks: Prints the number of ticks since the scheduler was started (vTaskStartScheduler)\r\n",
+		(const pdCOMMAND_LINE_CALLBACK)CLI_Ticks,
+		0};
 
 /******************************************************************************
  * Forward Declarations
@@ -54,6 +72,9 @@ void vCommandConsoleTask(void *pvParameters)
 
     FreeRTOS_CLIRegisterCommand(&xClearScreen);
     FreeRTOS_CLIRegisterCommand(&xResetCommand);
+	FreeRTOS_CLIRegisterCommand(&xVersionCommand);
+	FreeRTOS_CLIRegisterCommand(&xTicksCommand);
+
 
     uint8_t cRxedChar[2], cInputIndex = 0;
     BaseType_t xMoreDataToFollow;
@@ -65,6 +86,8 @@ void vCommandConsoleTask(void *pvParameters)
     static uint8_t pcEscapeCodePos = 0;
 
     // Any semaphores/mutexes/etc you needed to be initialized, you can do them here
+	xSemaphoreRX = xSemaphoreCreateCounting(SEMAPHORE_RX_MAX_COUNT, 0);
+
 
     /* This code assumes the peripheral being used as the console has already
     been opened and configured, and is passed into the task as the task
@@ -209,15 +232,20 @@ void vCommandConsoleTask(void *pvParameters)
 
 /**************************************************************************/ /**
  * @fn			void FreeRTOS_read(char* character)
- * @brief		STUDENTS TO COMPLETE. This function block the thread unless we received a character. How can we do this?
+ * @brief		 This function block the thread unless we received a character. How can we do this?
                  There are multiple solutions! Check all the inter-thread communications available! See https://www.freertos.org/a00113.html
- * @details		STUDENTS TO COMPLETE.
+ * @details		take a counting semaphore, blocks if no read available in circular buffer else takes, 
+					circular buffer get function gets a value from the circular value once the blocking
+					stops and puts in the specified address from the parameter
  * @note
  *****************************************************************************/
 static void FreeRTOS_read(char *character)
 {
-    // ToDo: Complete this function
-    vTaskSuspend(NULL); // We suspend ourselves. Please remove this when doing your code
+	//xSemaphoreTake is blocking if reading from the circular buffer is not possible
+	// portMAX_DELAY makes this blocking "infinite"
+	if (xSemaphoreTake( xSemaphoreRX, portMAX_DELAY )) {  
+		SerialConsoleReadCharacter((uint8_t *)character); //read character
+	}
 }
 
 /******************************************************************************
@@ -241,4 +269,22 @@ BaseType_t CLI_ResetDevice(int8_t *pcWriteBuffer, size_t xWriteBufferLen, const 
 {
     system_reset();
     return pdFALSE;
+}
+
+BaseType_t CLI_Version(int8_t *pcWriteBuffer, size_t xWriteBufferLen, const int8_t *pcCommandString)
+{
+	/* actual implementation */
+	char* version = CODE_VERSION;
+	snprintf(bufCli, CLI_MSG_LEN - 1, "V %s\r\n", version);
+	snprintf(pcWriteBuffer, xWriteBufferLen, bufCli);
+	return pdFALSE;
+}
+
+BaseType_t CLI_Ticks(int8_t *pcWriteBuffer, size_t xWriteBufferLen, const int8_t *pcCommandString)
+{
+	TickType_t t_ticks = xTaskGetTickCount();
+	unsigned int ticks = (unsigned int)t_ticks;
+	snprintf(bufCli, CLI_MSG_LEN - 1, "Ticks: %u\r\n", ticks);
+	snprintf(pcWriteBuffer, xWriteBufferLen, bufCli);
+	return pdFALSE;
 }
