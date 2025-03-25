@@ -63,6 +63,9 @@ char rxCharacterBuffer[RX_BUFFER_SIZE]; 			   ///< Buffer to store received char
 char txCharacterBuffer[TX_BUFFER_SIZE]; 			   ///< Buffer to store characters to be sent
 enum eDebugLogLevels currentDebugLevel = LOG_INFO_LVL; ///< Default debug level
 
+SemaphoreHandle_t xSemaphoreRX;
+
+
 /******************************************************************************
  * Global Functions
  ******************************************************************************/
@@ -225,13 +228,17 @@ static void configure_usart_callbacks(void)
 /**
  * @fn			void usart_read_callback(struct usart_module *const usart_module)
  * @brief		Callback called when the system finishes receives all the bytes requested from a UART read job
-		 Students to fill out. Please note that the code here is dummy code. It is only used to show you how some functions work.
  * @note
  *****************************************************************************/
 void usart_read_callback(struct usart_module *const usart_module)
 {
-	// ToDo: Complete this function 
-	if (!circular_buf_full(cbufRx))
+	// Store the received byte in the buffer
+	circular_buf_put(cbufRx, latestRx);  // Function to store latestRx in the circular buffer
+	
+	// Give the semaphore (since it is counting you can give multiple times)
+	xSemaphoreGive(xSemaphoreRX);
+
+	if (!circular_buf_full(cbufTx)) // continue reading if the buffer is not full
 	{
 		usart_read_buffer_job(&usart_instance, (uint8_t *)&latestRx, 1);
 	}
@@ -240,7 +247,7 @@ void usart_read_callback(struct usart_module *const usart_module)
 /**************************************************************************/ 
 /**
  * @fn			void usart_write_callback(struct usart_module *const usart_module)
- * @brief		Callback called when the system finishes sending all the bytes requested from a UART read job
+ * @brief		Callback called when the system finishes sending all the bytes requested from a UART write job
  * @note
  *****************************************************************************/
 void usart_write_callback(struct usart_module *const usart_module)
