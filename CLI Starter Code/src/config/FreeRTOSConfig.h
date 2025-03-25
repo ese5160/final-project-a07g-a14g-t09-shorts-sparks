@@ -71,6 +71,8 @@ void assert_triggered( const char * file, uint32_t line );
 #define configENABLE_BACKWARD_COMPATIBILITY     1
 #define configUSE_DAEMON_TASK_STARTUP_HOOK		1	// Ported from FreeRToS 9.0.0
 
+#define configSUPPORT_DYNAMIC_ALLOCATION		1
+
 /* Co-routine definitions. */
 #define configUSE_CO_ROUTINES                   0
 #define configMAX_CO_ROUTINE_PRIORITIES         ( 2 )

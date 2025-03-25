@@ -434,15 +434,17 @@ Channel 2: **TX**
 
 Commit your functioning CLI code to your GitHub repo, and make comments that are in Doxygen style.
 
+[CLI Starter Code Folder](<CLI Starter Code>)
+
 ## 6 Add CLI commands
 
 ### Code
 
-Commit your functioning CLI code to your GitHub repo, and make comments that are in Doxygen style.
+[CLI Starter Code Folder](<CLI Starter Code>)
 
 ### Video Link
 
-Submit a link to a video of this functionality in your README.md
+[Drive Video](https://drive.google.com/file/d/1wD7MSzUlCqM78t7Udv9mlDJ67sxXIQjJ/view?usp=sharing)
 
 ## 7 Using Percepio
 
