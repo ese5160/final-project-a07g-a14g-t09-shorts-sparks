@@ -63,12 +63,22 @@
 
 ### Block Diagram for software tasks
 
-temp
+Due to the nature of this project having a lot of exceptions, the actual "tasks" handled by the main MCU is not a lot besides the wifi, cli, and SD card. The main MCU serves as a hub for data distribution (like an orchestra conductor if you will) as it simply sends instructions to corresponding sub MCUs for closed loop feedback. 
+
+The actual sensor/actuators are handled by the SAMD21s in bare metal, and the generation of GCode/conversion to motor instructions happen in the web portal before reaching the SAMW25. 
+
+Hence, unfortunately this makes it seem like not a real "RTOS" as all of the implementation happens in a single task. 
+
+The next setions shoes more in depth the specifics of the bare metal closed loop motor control flow chart and the main task flow diagram.
+
+![alt text](<A07G_images/main block diagram.png>)
 
 ### Flowcharts and State Machines
 
 #### SAMD21 Baremetal Super Loop 
 ![alt text](<A07G_images/SAMD21 Flow Diagram.png>)
+
+
 ## 2 Understanding the Starter Code
 
 ### 1: What does “InitializeSerialConsole()” do? In said function, what is “cbufRx” and “cbufTx”? What type of data structure is it?
