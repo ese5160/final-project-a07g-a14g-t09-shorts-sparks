@@ -74,6 +74,8 @@ The next setions shoes more in depth the specifics of the bare metal closed loop
 ![alt text](<A07G_images/main block diagram.png>)
 
 ### Flowcharts and State Machines
+#### SAMW25 Main Task State Machine
+![alt text](A07G_images/main.png)
 
 #### SAMD21 Baremetal Super Loop 
 ![alt text](<A07G_images/SAMD21 Flow Diagram.png>)
