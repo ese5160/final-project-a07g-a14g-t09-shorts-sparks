@@ -58,8 +58,8 @@
 | SRS-11 | The webpage portal shall handle GCode to motor instruction conversion | N/A    |
 | SRS-12 | An OTAFU shall be implemented | N/A    |
 | SRS-13 | A CLI shall be implemented | N/A    |
-| SRS-04 | The communication between MCUs shall use I2C (and some gpio) | N/A    |
-| SRS-05 | The communication between MUC and SD card shall use SPI | N/A    |
+| SRS-14 | The communication between MCUs shall use I2C (and some gpio) | N/A    |
+| SRS-15 | The communication between MUC and SD card shall use SPI | N/A    |
 
 ### Block Diagram for software tasks
 
@@ -67,8 +67,8 @@ temp
 
 ### Flowcharts and State Machines
 
-temp
-
+#### SAMD21 Baremetal Super Loop 
+![alt text](<A07G_images/SAMD21 Flow Diagram.png>)
 ## 2 Understanding the Starter Code
 
 ### 1: What does “InitializeSerialConsole()” do? In said function, what is “cbufRx” and “cbufTx”? What type of data structure is it?
