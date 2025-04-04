@@ -74,6 +74,8 @@ The next setions shoes more in depth the specifics of the bare metal closed loop
 ![alt text](<A07G_images/main block diagram.png>)
 
 ### Flowcharts and State Machines
+#### SAMW25 Main Task State Machine
+![alt text](A07G_images/main.png)
 
 #### SAMD21 Baremetal Super Loop 
 ![alt text](<A07G_images/SAMD21 Flow Diagram.png>)
@@ -442,7 +444,7 @@ Commit your functioning CLI code to your GitHub repo, and make comments that are
 
 ### Video Link
 
-Submit a link to a video of this functionality in your README.md
+[Drive Video](https://drive.google.com/file/d/1wD7MSzUlCqM78t7Udv9mlDJ67sxXIQjJ/view?usp=sharing)
 
 ## 7 Using Percepio
 
